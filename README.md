@@ -1,49 +1,35 @@
-[![Build Status](https://travis-ci.org/zoffixznet/perl6-WWW-You-reDoingItWrong.svg)](https://travis-ci.org/zoffixznet/perl6-WWW-You-reDoingItWrong)
+[![Build Status](https://travis-ci.org/zoffixznet/perl6-Number-Denominate.svg)](https://travis-ci.org/zoffixznet/perl6-Number-Denominate)
 
 # NAME
 
-WWW::You'reDoingItWrong - Why say someone is doing it wrong when you can SHOW it?
+Number::Denominate - break up numbers into arbitrary denominations
 
 # SYNOPSIS
 
 ```perl6
-    use WWW::You'reDoingItWrong;
+    Number::Denominate;
 
-    $*answer or die you're doing it wrong;
+
 ```
 
 # DESCRIPTION
 
-This module fetches a random image URL from www.doingitwrong.com and returns
-a string of text with it.
+Define arbitrary set of units and split up a number into those units. The
+module includes preset sets of units for some measures.
 
 # EXPORTED SUBROUTINES
 
-## `you're doing it wrong`
-
-```perl6
-    $*answer or die you're doing it wrong;
-
-    say you're doing it wrong;
-```
-
-Takes no arguments, returns string `You're doing it wrong: URL`, where
-`URL` is a link to a random image from www.doingitwrong.com. Those with keen
-eyes will also notice this documentation is Doing It Wrong.
-
-# SEE ALSO
-
-https://www.doingitwrong.com
+## `denominate`
 
 # REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/perl6-WWW-You-reDoingItWrong
+https://github.com/zoffixznet/perl6-Number-Denominate
 
 # BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-WWW-You-reDoingItWrong/issues
+https://github.com/zoffixznet/perl6-Number-Denominate/issues
 
 # AUTHOR
 
