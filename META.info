@@ -2,7 +2,7 @@
     "name"         : "Number::Denominate",
     "version"      : "1.001001",
     "description"  : "Break up numbers into arbitrary denominations",
-    "depends"      : [ ],
+    "depends"      : [ "Lingua::Conjunction" ],
     "test-depends" : [ "Test" ],
     "provides"     : {
         "Number::Denominate" : "lib/Number/Denominate.pm6"
