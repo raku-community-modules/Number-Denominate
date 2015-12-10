@@ -4,36 +4,6 @@
 
 Number::Denominate - break up numbers into arbitrary denominations
 
-# TABLE OF CONTENTS
-- [SYNOPSIS](#synopsis)
-- [DESCRIPTION](#description)
-- [EXPORTED SUBROUTINES](#exported-subroutines)
-    - [`denominate`](#denominate)
-        - [`array`](#array)
-            - [`denomination`](#denomination)
-            - [`plural`](#plural)
-            - [`singular`](#singular)
-            - [`value`](#value)
-        - [`hash`](#hash)
-        - [`precision`](#precision)
-        - [`set`](#set)
-            - [`info`](#info)
-            - [`info-1024`](#info-1024)
-            - [`length`](#length)
-            - [`length-imperial`](#length-imperial)
-            - [`length-mm`](#length-mm)
-            - [`time`](#time)
-            - [`volume`](#volume)
-            - [`volume-imperial`](#volume-imperial)
-            - [`weight`](#weight)
-            - [`weight-imperial`](#weight-imperial)
-        - [`string`](#string)
-        - [`units`](#units)
-- [REPOSITORY](#repository)
-- [BUGS](#bugs)
-- [AUTHOR](#author)
-- [LICENSE](#license)
-
 # SYNOPSIS
 
 ```perl6
@@ -66,6 +36,37 @@ Number::Denominate - break up numbers into arbitrary denominations
     #]
     say (denominate 1234567, :array).perl;
 ```
+
+# TABLE OF CONTENTS
+- [NAME](#name)
+- [SYNOPSIS](#synopsis)
+- [DESCRIPTION](#description)
+- [EXPORTED SUBROUTINES](#exported-subroutines)
+    - [`denominate`](#denominate)
+        - [`array`](#array)
+            - [`denomination`](#denomination)
+            - [`plural`](#plural)
+            - [`singular`](#singular)
+            - [`value`](#value)
+        - [`hash`](#hash)
+        - [`precision`](#precision)
+        - [`set`](#set)
+            - [`info`](#info)
+            - [`info-1024`](#info-1024)
+            - [`length`](#length)
+            - [`length-imperial`](#length-imperial)
+            - [`length-mm`](#length-mm)
+            - [`time`](#time)
+            - [`volume`](#volume)
+            - [`volume-imperial`](#volume-imperial)
+            - [`weight`](#weight)
+            - [`weight-imperial`](#weight-imperial)
+        - [`string`](#string)
+        - [`units`](#units)
+- [REPOSITORY](#repository)
+- [BUGS](#bugs)
+- [AUTHOR](#author)
+- [LICENSE](#license)
 
 # DESCRIPTION
 
