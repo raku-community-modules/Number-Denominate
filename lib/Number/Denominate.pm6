@@ -66,46 +66,85 @@ subset ValidUnitSet of Str where any <time weight weight-imperial length
 sub denominate (
     $num is copy,
     ValidUnitSet :$set = 'time',
+    Bool :$array       = False,
     Bool :$hash        = False,
-    Bool :$string      = True,
+    Bool :$string      = ($array or $hash) ?? False !! True,
     :@units is copy    = %Units{ $set },
-    Int  :$precision   = @units.elems,
+    Int  :$precision where $_ >= 1 = @units.elems,
 ) is export {
-    my %break-down;
-    my @break-down;
-
-    if ( $num == 0 ) {
-        return {} if $hash;
-        my $u = @units.tail;
-        return "0 " ~ ($u ~~ List ?? $u[1] !! $u ~ 's');
+    # Normalize units
+    for @units {
+        $_ ~~ Pair or $_ = $_ => 1;
+        $_ ~~ Pair and .key ~~ Str
+            and $_ = (.key, .key ~ 's') => .value;
+        $_ = %(
+            singular     => .key[0],
+            plural       => .key[1],
+            denomination => .value,
+            value        => 0,
+        );
     }
 
-    my $mult = 1;
-    for @units { next unless $_ ~~ Pair; $mult *= .value }
+    # Short-curcuit on this special case:
+    if $num == 0 {
+        $string and return "0 @units[*-1]<plural>";
+        $hash   and return %();
+        $array  and return @units;
+    }
 
-    for @units -> $u {
-        if ( $u ~~ Pair ) {
-            my ( $k, $v ) = $u.key, $u.value;
-            $k = ("$k", "{$k}s") unless $k ~~ List;
+    my $mult *= $_<denomination> for @units;
+    for @units {
+        my $n = $num.Int div $mult.Int;
+        $num -= $mult*$n;
+        $mult /= $_<denomination>;
+        $_<value> = $n;
+    }
 
-            my $n = $num.Int div $mult.Int;
-            $num -= $mult*$n;
-            my $name = $n == 1 ?? $k[0] !! $k[1];
-            $hash   and $n and %break-down{ $name } = $n;
-            $string and $n and @break-down.append: "$n $name";
+    if $precision < @units.elems {
+        my $set = 0;
+        for 0 .. @units.end -> $idx is copy {
+            my $u = @units[$idx];
+            next unless $u<value>;
+            next unless ++$set > $precision;
+            # we have too many units if we got up to here
 
-            $mult /= $v;
-        }
-        elsif ( $u ~~ Str | List ) {
-            my $name = $u ~~ Str
-                ?? $num == 1 ?? $u    !! $u ~ 's'
-                !! $num == 1 ?? $u[0] !! $u[1];
-            $num .= Int;
-            $hash   and $num and %break-down{ $name } = $num;
-            $string and $num and @break-down.append: "$num $name";
+            # Reset any remaining units to zero
+            @units[$_]<value> = 0  for $idx+1 .. @units.end;
+
+            # just drop out if rounding doesn't increase previous unit
+            if ( $u<value> / @units[$idx-1]<denomination> < .5 ) {
+                $u<value> = 0;
+                last;
+            }
+
+            # Set value of our current unit to zero, since we're rounding it.
+            # Switch to the previous unit. If it's not set, just bail out,
+            # since increasing it will mean we'll have too many units again
+            loop {
+                $u<value> = 0;
+                $u = @units[--$idx];
+
+                if $idx == 0 or (
+                    not $u<value> and not @units[0..$idx-1].grep({$_<value>})
+                ) {
+                    # Either we're at the top unit, or there are no set units
+                    # higher up. Just increase this one and bail.
+                    $u<value>++;
+                    last;
+                }
+                last unless $u<value>;
+                last unless ++$u<value> == @units[$idx-1]<denomination>;
+                # If we got here, we overflown the unit, so we need to bump
+                # the next previous one
+            }
+            last;
         }
     }
 
-    return %break-down if $hash;
-    return conjunction @break-down;
+    return @units if $array;
+    @units .= grep({ $_<value> });
+    $hash and return %( @units.map({ $_<singular> => $_<value> }) );
+    $string and return conjunction @units.map({
+        $_<value> == 1 ?? "$_<value> $_<singular>" !! "$_<value> $_<plural>"
+    });
 }
