@@ -36,16 +36,47 @@ unit package Number::Denominate:ver<1.001001>;
 # ],
 ;
 
-subset ValidUnitSet of Str where any <>;
-
 my %Units = time => (
-        <second> => 60, <minute> => 60, <hour> => 24, <day> => 7, <week>
+    second => 60, minute => 60, hour => 24, day => 7, <week>
+    #week => 7, day => 24, hour => 60, minute => 60, <second>
 );
 
-sub denominate is export (
+subset ValidUnitSet of Str where any <time>;
+sub denominate (
+    $num is copy,
     ValidUnitSet :$set = 'time',
     Bool :$hash   = False,
     Bool :$list   = False,
     Bool :$string = True,
-         :@units  = %Units{ $set },
-)
+         :@units is copy = %Units{ $set },
+) is export {
+    my %break-down;
+
+    my $total = 1;
+    for @units -> $u {
+        next unless $u ~~ Pair;
+        my $nv = $u.value * $total;
+        $u = ( $u.key => $nv );
+        $total = $u.value;
+    }
+    say @units;
+
+    for @units -> $u {
+        if ( $u ~~ Pair ) {
+            my ( $k, $v ) = $u.key, $u.value;
+            $k = ("$k", "{$k}s") unless $k ~~ List;
+            my $n = $num div $v;
+            $num = $num - $v*$n;
+            %break-down{ $n == 1 ?? $k[0] !! $k[1] } = $n;
+        }
+        elsif ( $u ~~ Str ) {
+            %break-down{$u} = $num;
+        }
+        elsif ( $u ~~ List ) {
+            my $k = $num == 1 ?? $u[0] !! $u[1];
+            %break-down{$k} = $num;
+        }
+    }
+
+    return %break-down;
+}
