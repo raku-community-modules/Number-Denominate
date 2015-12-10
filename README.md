@@ -4,6 +4,20 @@
 
 Number::Denominate - break up numbers into arbitrary denominations
 
+# TABLE OF CONTENTS
+- [SYNOPSIS](#SYNOPSIS)
+- [DESCRIPTION](#DESCRIPTION)
+- [EXPORTED SUBROUTINES](#EXPORTED-SUBROUTINES)
+    - [`denominate`](#denominate)
+        - [Plain Button](#plain-button)
+        - [Danger Button](#danger-button)
+        - [Go Back Button](#go-back-button)
+        - [Notice Me Button](#notice-me-button)
+- [REPOSITORY](#REPOSITORY)
+- [BUGS](#BUGS)
+- [AUTHOR](#AUTHOR)
+- [LICENSE](#LICENSE)
+
 # SYNOPSIS
 
 ```perl6
@@ -58,7 +72,7 @@ https://github.com/zoffixznet/perl6-Number-Denominate/issues
 
 # AUTHOR
 
-http://zoffix.com/
+Zoffix Znet (http://zoffix.com/)
 
 # LICENSE
 
