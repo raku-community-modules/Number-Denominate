@@ -87,6 +87,7 @@ module includes preset sets of units for some measures.
     # Valid unit sets: info info-1024 length length-imperial length-mm time
     # volume volume-imperial weight weight-imperial
     denominate 21212121, :set<weight>;
+```
 
 **Takes** one mandatory positional argument—the number to denominate—and
 a number of optional named arguments that affect how the number is denominated
