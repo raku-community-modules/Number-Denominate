@@ -172,9 +172,9 @@ values.
 
 Loads a pre-defined set of [`units`](#units) to use for denominations.
 Has effect only when[`units`](#units) argument is not specified.
-***Defaults to*** `time`. ***Takes*** one of the predefined unit sets, which
-are as follows (see description of [`units`](#units) argument, if the meaning
-of values is not clear):
+***Defaults to*** [`time`](#time). ***Takes*** one of the predefined unit sets,
+which are as follows (see description of [`units`](#units) argument, if the
+meaning of values is not clear):
 
 #### `info`
 
