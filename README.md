@@ -284,7 +284,7 @@ Boolean. Has effect only when [`hash`](#hash) and [`array`](#array) arguments
 are `False` (that's the default). **Defaults to** `True`. When `True`,
 [`denominate`](#denominate) will return its output as a string. Units
 whose values are zero won't be included, unless the number to denominate is
-`0`, in which case the smallest available unitwill be present in the
+`0`, in which case the smallest available unit will be present in the
 string (set to `0`).
 
 ### `units`
@@ -294,8 +294,9 @@ string (set to `0`).
     say denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
 
     # These two are the same:
-    denominate 42, :units( hour => 60,  minute => 60, 'second' );
+    denominate 42, :units( day => 24, hour => 60,  minute => 60, 'second' );
     denominate 42, :units(
+        <day days>       => 24,
         <hour hours>     => 60,
         <minute minutes> => 60,
         <second seconds>
