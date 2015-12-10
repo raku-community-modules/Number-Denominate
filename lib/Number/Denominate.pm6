@@ -74,6 +74,13 @@ sub denominate (
     my @break-down;
     my @string-break-down;
 
+    if ( $num == 0 ) {
+        return {} if $hash;
+        return [ 0 x @units ] if $array;
+        my $u = @units.tail;
+        return "0 " ~ ($u ~~ List ?? $u[1] !! $u ~ 's');
+    }
+
     my $mult = 1;
     for @units { next unless $_ ~~ Pair; $mult *= .value }
 
@@ -90,6 +97,7 @@ sub denominate (
             $string and $n and @string-break-down.append: "$n $name";
 
             $mult /= $v;
+            say "$mult $v";
         }
         elsif ( $u ~~ Str | List ) {
             my $name = $u ~~ Str
