@@ -37,8 +37,8 @@ unit package Number::Denominate:ver<1.001001>;
 ;
 
 my %Units = time => (
-    #second => 60, minute => 60, hour => 24, day => 7, <week>
-    week => 7, day => 24, hour => 60, minute => 60, <second>
+    <week weeks> => 7, <day days> => 24, <hour hours> => 60,
+        <minute minutes> => 60, <second seconds>
 );
 
 subset ValidUnitSet of Str where any <time>;
@@ -53,19 +53,19 @@ sub denominate (
     my %break-down;
 
     my $mult = 1;
-    for @units -> $u {
-        next unless $u ~~ Pair;
-        $mult *= $u.value
-    }
-    say $mult;
+    for @units { next unless $_ ~~ Pair; $mult *= .value }
 
     for @units -> $u {
         if ( $u ~~ Pair ) {
             my ( $k, $v ) = $u.key, $u.value;
             $k = ("$k", "{$k}s") unless $k ~~ List;
-            my $n = $num div $v;
-            $num = $num - $v*$n;
+
+            my $n = $num.Int div $mult.Int;
+            $num -= $mult*$n;
+            #say "$k[0] $k[1]";
             %break-down{ $n == 1 ?? $k[0] !! $k[1] } = $n;
+
+            $mult /= $v;
         }
         elsif ( $u ~~ Str ) {
             %break-down{$u} = $num;
@@ -76,5 +76,7 @@ sub denominate (
         }
     }
 
+    $_ = $_.Int for values %break-down;
+    %break-down{ %break-down.keys.grep({ %break-down{$_} == 0 }) }:delete;
     return %break-down;
 }
