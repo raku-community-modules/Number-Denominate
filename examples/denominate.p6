@@ -4,6 +4,8 @@ use v6;
 use lib 'lib';
 use Number::Denominate;
 
+say denominate 23*3600 + 59*60 + 59, :1precision; # 86399
+=finish
 # 2 weeks, 6 hours, 56 minutes, and 7 seconds
 say denominate 1234567;
 
@@ -18,6 +20,3 @@ say denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
 
 # {:hours(6), :minutes(56), :seconds(7), :weeks(2)}
 say (denominate 1234567, :hash).perl;
-
-# [2, 0, 6, 56, 7]
-say (denominate 1234567, :array).perl;

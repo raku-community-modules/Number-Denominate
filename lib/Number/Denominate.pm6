@@ -62,21 +62,20 @@ my %Units =
 
 subset ValidUnitSet of Str where any <time weight weight-imperial length
     length-mm length-imperial volume volume-imperial info info-1024>;
+
 sub denominate (
     $num is copy,
     ValidUnitSet :$set = 'time',
-    Bool :$hash   = False,
-    Bool :$array  = False,
-    Bool :$string = True,
-         :@units is copy = %Units{ $set },
+    Bool :$hash        = False,
+    Bool :$string      = True,
+    :@units is copy    = %Units{ $set },
+    Int  :$precision   = @units.elems,
 ) is export {
     my %break-down;
     my @break-down;
-    my @string-break-down;
 
     if ( $num == 0 ) {
         return {} if $hash;
-        return [ 0 x @units ] if $array;
         my $u = @units.tail;
         return "0 " ~ ($u ~~ List ?? $u[1] !! $u ~ 's');
     }
@@ -92,26 +91,21 @@ sub denominate (
             my $n = $num.Int div $mult.Int;
             $num -= $mult*$n;
             my $name = $n == 1 ?? $k[0] !! $k[1];
-            $hash   and %break-down{ $name } = $n;
-            $array  and @break-down.append: $n;
-            $string and $n and @string-break-down.append: "$n $name";
+            $hash   and $n and %break-down{ $name } = $n;
+            $string and $n and @break-down.append: "$n $name";
 
             $mult /= $v;
-            say "$mult $v";
         }
         elsif ( $u ~~ Str | List ) {
             my $name = $u ~~ Str
                 ?? $num == 1 ?? $u    !! $u ~ 's'
                 !! $num == 1 ?? $u[0] !! $u[1];
             $num .= Int;
-            $hash   and %break-down{ $name } = $num;
-            $array  and @break-down.append: $num;
-            $string and $num and @string-break-down.append: "$num $name";
+            $hash   and $num and %break-down{ $name } = $num;
+            $string and $num and @break-down.append: "$num $name";
         }
     }
 
-    %break-down{ %break-down.keys.grep({ %break-down{$_} == 0 }) }:delete;
     return %break-down if $hash;
-    return @break-down if $array;
-    return conjunction @string-break-down;
+    return conjunction @break-down;
 }
