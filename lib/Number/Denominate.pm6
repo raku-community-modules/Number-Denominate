@@ -36,10 +36,11 @@ unit package Number::Denominate:ver<1.001001>;
 # ],
 ;
 
-my %Units = time => (
-    <week weeks> => 7, <day days> => 24, <hour hours> => 60,
-        <minute minutes> => 60, <second seconds>
-);
+my %Units =
+    time => (
+        week => 7, day => 24, hour => 60, minute => 60, <second>
+    ),
+;
 
 subset ValidUnitSet of Str where any <time>;
 sub denominate (
@@ -62,17 +63,15 @@ sub denominate (
 
             my $n = $num.Int div $mult.Int;
             $num -= $mult*$n;
-            #say "$k[0] $k[1]";
             %break-down{ $n == 1 ?? $k[0] !! $k[1] } = $n;
 
             $mult /= $v;
         }
         elsif ( $u ~~ Str ) {
-            %break-down{$u} = $num;
+            %break-down{ $num == 1 ?? $u    !! "{$u}s" } = $num;
         }
         elsif ( $u ~~ List ) {
-            my $k = $num == 1 ?? $u[0] !! $u[1];
-            %break-down{$k} = $num;
+            %break-down{ $num == 1 ?? $u[0] !! $u[1]   } = $num;
         }
     }
 
