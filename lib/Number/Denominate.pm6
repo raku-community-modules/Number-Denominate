@@ -37,8 +37,8 @@ unit package Number::Denominate:ver<1.001001>;
 ;
 
 my %Units = time => (
-    second => 60, minute => 60, hour => 24, day => 7, <week>
-    #week => 7, day => 24, hour => 60, minute => 60, <second>
+    #second => 60, minute => 60, hour => 24, day => 7, <week>
+    week => 7, day => 24, hour => 60, minute => 60, <second>
 );
 
 subset ValidUnitSet of Str where any <time>;
@@ -52,14 +52,12 @@ sub denominate (
 ) is export {
     my %break-down;
 
-    my $total = 1;
+    my $mult = 1;
     for @units -> $u {
         next unless $u ~~ Pair;
-        my $nv = $u.value * $total;
-        $u = ( $u.key => $nv );
-        $total = $u.value;
+        $mult *= $u.value
     }
-    say @units;
+    say $mult;
 
     for @units -> $u {
         if ( $u ~~ Pair ) {
