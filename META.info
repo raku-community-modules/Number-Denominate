@@ -1,4 +1,5 @@
 {
+    "perl"         : "6.*",
     "name"         : "Number::Denominate",
     "version"      : "1.001001",
     "description"  : "Break up numbers into preset or arbitrary denominations",
