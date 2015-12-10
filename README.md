@@ -155,8 +155,8 @@ are zero will not be included.
 **Takes** positive integers as the value. **Defaults to** the number of
 [`units`](#units) given (or the number of units in the [`set`](#set)).
 Specifies how many, at most, units to include in the output. Rounding will
-be performed. When output mode is set to [`array`](#array), all units will
-be present, but at most [`precision`](#precision) units will have non-zero
+be performed if needed. When output mode is set to [`array`](#array), all units
+will be present, but at most [`precision`](#precision) units will have non-zero
 values.
 
 ### `set`
@@ -174,9 +174,9 @@ values.
 
 Loads a pre-defined set of [`units`](#units) to use for denominations.
 Has effect only when[`units`](#units) argument is not specified.
-**Defaults to** [`time`](#time). **Takes** one of the predefined unit sets,
-which are as follows (see description of [`units`](#units) argument, if the
-meaning of values is not clear):
+**Defaults to** [`time`](#time). **Takes** the name of one of the predefined
+unit sets, which are as follows (see description of [`units`](#units) argument,
+if the meaning of values is not clear):
 
 #### `info`
 
