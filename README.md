@@ -308,7 +308,8 @@ key is the name of the unit and the value is the number of the next smaller
 unit that fits into this unit. The name is a list of singular and plural name
 of the unit. If the name is set to a string, the plural name will be derived
 by appending `s` to the singular unit name. The smallest unit is specified
-as a string indicating its name (or as a list of singular/plural strings).
+simply as a string indicating its name (or as a list of singular/plural
+strings).
 
 # REPOSITORY
 
