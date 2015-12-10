@@ -90,7 +90,7 @@ module includes preset sets of units for some measures.
 ```
 
 **Takes** one mandatory positional argument—the number to denominate—and
-a number of optional named arguments that affect how the number is denominated
+several optional named arguments that affect how the number is denominated
 and what format the denomination is returned in. See [`hash`](#hash)
 and [`array`](#array) arguments to modify the default [`string`](#string)
 return value. The named arguments are as follows:
@@ -107,9 +107,10 @@ return value. The named arguments are as follows:
     #]
     say (denominate 1234567, :array).perl;
 ```
-Boolean. ***Defaults to*** `False`. When `True`, [`denominate`](#denominate)
+Boolean. **Defaults to** `False`. When `True`, [`denominate`](#denominate)
 will return denominations as an array of hashes. Each hash represents a single
-unit and has these keys:
+unit and has the following keys. The array will always contain each
+[`unit`](#units), ordered from largest to smallest.
 
 #### `denomination`
 
@@ -134,7 +135,7 @@ The actual value of this unit.
     # {:hours(6), :minutes(56), :seconds(7), :weeks(2)}
     say (denominate 1234567, :hash).perl;
 ```
-Boolen. ***Defaults to*** `False`. When `True`, [`denominate`](#denominate)
+Boolen. **Defaults to** `False`. When `True`, [`denominate`](#denominate)
 will return denominations as a hash. The keys will be the **singular** names of
 units and values will be the values of those units. **Note:** units whose values
 are zero will not be included.
@@ -151,7 +152,7 @@ are zero will not be included.
     # 23 hours and 55 minutes
     say denominate 23*3600 + 54*60 + 50, :2precision;
 ```
-***Takes*** positive integers as the value. ***Defaults to*** the number of
+**Takes** positive integers as the value. **Defaults to** the number of
 [`units`](#units) given (or the number of units in the [`set`](#set)).
 Specifies how many, at most, units to include in the output. Rounding will
 be performed. When output mode is set to [`array`](#array), all units will
@@ -173,7 +174,7 @@ values.
 
 Loads a pre-defined set of [`units`](#units) to use for denominations.
 Has effect only when[`units`](#units) argument is not specified.
-***Defaults to*** [`time`](#time). ***Takes*** one of the predefined unit sets,
+**Defaults to** [`time`](#time). **Takes** one of the predefined unit sets,
 which are as follows (see description of [`units`](#units) argument, if the
 meaning of values is not clear):
 
@@ -280,8 +281,11 @@ Units of weight (Imperial).
     say denominate 1234567;
 ```
 Boolean. Has effect only when [`hash`](#hash) and [`array`](#array) arguments
-are `False` (that's the default). ***Defaults to*** `True`. When `True`,
-[`denominate`](#denominate) will return its output as a string.
+are `False` (that's the default). **Defaults to** `True`. When `True`,
+[`denominate`](#denominate) will return its output as a string. Units
+whose values are zero won't be included, unless the number to denominate is
+`0`, in which case the smallest available unitwill be present in the
+string (set to `0`).
 
 ### `units`
 
