@@ -2,7 +2,7 @@
 
 # NAME
 
-Number::Denominate - break up numbers into arbitrary denominations
+Number::Denominate - Break up numbers into preset or arbitrary denominations
 
 # SYNOPSIS
 

@@ -1,7 +1,7 @@
 {
     "name"         : "Number::Denominate",
     "version"      : "1.001001",
-    "description"  : "Break up numbers into arbitrary denominations",
+    "description"  : "Break up numbers into preset or arbitrary denominations",
     "depends"      : [ "Lingua::Conjunction" ],
     "test-depends" : [ "Test" ],
     "provides"     : {
