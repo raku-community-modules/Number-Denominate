@@ -37,6 +37,8 @@ Number::Denominate - Break up numbers into preset or arbitrary denominations
     say (denominate 1234567, :array).perl;
 ```
 
+<div style="float: left; width: 20%">
+
 # TABLE OF CONTENTS
 - [NAME](#name)
 - [SYNOPSIS](#synopsis)
@@ -67,6 +69,8 @@ Number::Denominate - Break up numbers into preset or arbitrary denominations
 - [BUGS](#bugs)
 - [AUTHOR](#author)
 - [LICENSE](#license)
+
+</div>
 
 # DESCRIPTION
 
