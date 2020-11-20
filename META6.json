@@ -10,5 +10,5 @@
         "Number::Denominate" : "lib/Number/Denominate.pm6"
     },
     "authors"      : ["Zoffix Znet"],
-    "support"      : {"source"   : "git://github.com/zoffixznet/perl6-Number-Denominate.git"}
+    "support"      : {"source"   : "git://github.com/raku-community-modules/Number-Denominate.git"}
 }
