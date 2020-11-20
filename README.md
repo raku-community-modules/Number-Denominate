@@ -6,7 +6,7 @@ Number::Denominate - Break up numbers into preset or arbitrary denominations
 
 # SYNOPSIS
 
-```perl6
+```raku
     use Number::Denominate;
 
     # 2 weeks, 6 hours, 56 minutes, and 7 seconds
@@ -79,7 +79,7 @@ Negative values will cause all units to obtain a negative sign.
 
 ## `denominate`
 
-```perl6
+```raku
     say denominate 1234567;
     say denominate 23*3600 + 54*60 + 50, :1precision;
     denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
@@ -99,7 +99,7 @@ return value. The named arguments are as follows:
 
 ### `array`
 
-```perl6
+```raku
     # [
     #   {:denomination(7),  :plural("weeks"),   :singular("week"),   :value(2) },
     #   {:denomination(24), :plural("days"),    :singular("day"),    :value(0) },
@@ -133,7 +133,7 @@ The actual value of this unit.
 
 ### `hash`
 
-```perl6
+```raku
     # {:hours(6), :minutes(56), :seconds(7), :weeks(2)}
     say (denominate 1234567, :hash).perl;
 ```
@@ -144,7 +144,7 @@ are zero will not be included.
 
 ### `precision`
 
-```perl6
+```raku
     # 23 hours, 54 minutes, and 50 seconds
     say denominate 23*3600 + 54*60 + 50;
 
@@ -163,7 +163,7 @@ values.
 
 ### `set`
 
-```perl6
+```raku
     # 2 weeks, 6 hours, 56 minutes, and 7 seconds
     say denominate 1234567;
 
@@ -182,7 +182,7 @@ if the meaning of values is not clear):
 
 #### `info`
 
-```perl6
+```raku
     yottabyte => 1000, zettabyte => 1000, exabyte => 1000, petabyte => 1000,
     terabyte  => 1000, gigabyte => 1000, megabyte => 1000, kilobyte => 1000,
     'byte'
@@ -191,7 +191,7 @@ Units of information.
 
 #### `info-1024`
 
-```perl6
+```raku
     yobibyte => 1024, zebibyte => 1024, exbibyte => 1024, pebibyte => 1024,
     tebibyte => 1024, gibibyte => 1024, mebibyte => 1024, kibibyte => 1024,
     'byte'
@@ -200,7 +200,7 @@ Units of information (multiples of 1024).
 
 #### `length`
 
-```perl6
+```raku
     'light year' => 9_460_730_472.5808,
         kilometer => 1000,
             'meter'
@@ -209,7 +209,7 @@ Units of length (large only).
 
 #### `length-imperial`
 
-```perl6
+```raku
     mile => 1760,
         yard => 3,
             <foot feet> => 12,
@@ -219,7 +219,7 @@ Units of length (Imperial).
 
 #### `length-mm`
 
-```perl6
+```raku
     'light year' => 9_460_730_472.5808,
         kilometer => 1000,
             meter => 100,
@@ -230,7 +230,7 @@ Units of length (includes smaller units).
 
 #### `time`
 
-```perl6
+```raku
     week => 7,
         day => 24,
             hour => 60,
@@ -241,7 +241,7 @@ Units of time.
 
 #### `volume`
 
-```perl6
+```raku
     Liter => 1000,
         'milliliter'
 ```
@@ -249,7 +249,7 @@ Units of volume.
 
 #### `volume-imperial`
 
-```perl6
+```raku
     gallon => 4,
         quart => 2,
             pint => 2,
@@ -260,7 +260,7 @@ Units of volume (Imperial).
 
 #### `weight`
 
-```perl6
+```raku
     tonne => 1000,
         kilogram => 1000,
             'gram'
@@ -269,7 +269,7 @@ Units of weight.
 
 #### `weight-imperial`
 
-```perl6
+```raku
     ton => 2_000,
         pound => 16,
             'ounce'
@@ -278,7 +278,7 @@ Units of weight (Imperial).
 
 ### `string`
 
-```perl6
+```raku
     # 2 weeks, 6 hours, 56 minutes, and 7 seconds
     say denominate 1234567;
 ```
@@ -291,7 +291,7 @@ string (set to `0`).
 
 ### `units`
 
-```perl6
+```raku
     # 4 foos, 2 boors, and 1 ber
     say denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
 
@@ -316,12 +316,12 @@ strings).
 # REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/perl6-Number-Denominate
+https://github.com/raku-community-modules/Number-Denominate
 
 # BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-Number-Denominate/issues
+https://github.com/raku-community-modules/Number-Denominate/issues
 
 # AUTHOR
 
