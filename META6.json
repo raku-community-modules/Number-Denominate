@@ -1,7 +1,7 @@
 {
   "name": "Number::Denominate",
   "description": "Break up numbers into preset or arbitrary denominations",
-  "version": "2.002001",
+  "version": "2.002002",
   "perl": "6.c",
   "authors": [
     "Zoffix Znet"
