@@ -64,7 +64,7 @@ subset ValidUnitSet of Str where any <time weight weight-imperial length
     length-mm length-imperial volume volume-imperial info info-1024>;
 
 sub denominate (
-    $num is copy,
+    $num is copy where Int|Num,
     ValidUnitSet :$set = 'time',
     Bool :$array       = False,
     Bool :$hash        = False,
@@ -93,7 +93,7 @@ sub denominate (
     }
 
     my $neg := False;
-    if $num < 0 {
+    if  $num < 0 {
         $num .= abs;
         $neg := True;
     }
