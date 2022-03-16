@@ -1,4 +1,4 @@
-# NAME
+# NAME [![Tests on source](https://github.com/raku-community-modules/Number-Denominate/actions/workflows/test.yaml/badge.svg)](https://github.com/raku-community-modules/Number-Denominate/actions/workflows/test.yaml)
 
 Number::Denominate - Break up numbers into preset or arbitrary denominations
 
