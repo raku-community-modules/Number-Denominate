@@ -325,6 +325,9 @@ https://github.com/raku-community-modules/Number-Denominate/issues
 
 Zoffix Znet (http://zoffix.com/)
 
+Currently maintained in the [Raku community module adoption center]
+(https://github.com/raku-community-modules).
+
 # LICENSE
 
 You can use and distribute this module under the terms of the
