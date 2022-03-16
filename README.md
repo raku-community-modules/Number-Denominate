@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/zoffixznet/perl6-Number-Denominate.svg)](https://travis-ci.org/zoffixznet/perl6-Number-Denominate)
-
 # NAME
 
 Number::Denominate - Break up numbers into preset or arbitrary denominations
