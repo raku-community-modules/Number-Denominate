@@ -1,14 +1,23 @@
 {
-    "perl"         : "6.c",
-    "name"         : "Number::Denominate",
-    "license"      : "Artistic-2.0",
-    "version"      : "2.002001",
-    "description"  : "Break up numbers into preset or arbitrary denominations",
-    "depends"      : [ "Lingua::Conjunction" ],
-    "test-depends" : [ "Test" ],
-    "provides"     : {
-        "Number::Denominate" : "lib/Number/Denominate.pm6"
-    },
-    "authors"      : ["Zoffix Znet"],
-    "support"      : {"source"   : "git://github.com/raku-community-modules/Number-Denominate.git"}
+  "name": "Number::Denominate",
+  "description": "Break up numbers into preset or arbitrary denominations",
+  "version": "2.002001",
+  "perl": "6.c",
+  "authors": [
+    "Zoffix Znet"
+  ],
+  "auth": "zef:raku-community-modules",
+  "depends": [
+    "Lingua::Conjunction"
+  ],
+  "test-depends": [
+    "Test"
+  ],
+  "provides": {
+    "Number::Denominate": "lib/Number/Denominate.pm6"
+  },
+  "support": {
+    "source": "git://github.com/raku-community-modules/Number-Denominate.git"
+  },
+  "license": "Artistic-2.0"
 }
