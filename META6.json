@@ -18,9 +18,11 @@
   "resources": [
   ],
   "source-url": "https://github.com/raku-community-modules/Number-Denominate.git",
-  "tags": [ "NUMBER", "DENOMINATE"
+  "tags": [
+    "NUMBER",
+    "DENOMINATE"
   ],
   "test-depends": [
   ],
-  "version": "2.002002"
+  "version": "2.1"
 }

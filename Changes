@@ -2,5 +2,10 @@ Revision History for Number-Denominate
 
 {{$NEXT}}
 
+2.1  2024-11-30T19:47:16+01:00
+    - Added CI badge for each OS
+    - Use modern filename extensions
+    - Move documentation to a separate file
+
 1.001001  2015-12-08
     - First version released on an unsuspecting world
