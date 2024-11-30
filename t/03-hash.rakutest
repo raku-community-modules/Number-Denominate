@@ -1,9 +1,7 @@
-#!perl6
-
-use v6;
 use Test;
-use lib 'lib';
 use Number::Denominate;
+
+plan 10;
 
 my %data = denominate 12661, :hash, :units(
     <hour hours> => 60,
@@ -45,4 +43,4 @@ is-deeply denominate( 3601, :hash, :set<time> ), { hour => 1, second => 1 },
 is-deeply denominate( -3601, :hash, :set<time> ), { hour => -1, second => -1 },
     'testing "missing" units, when their number is 0 [test 6]';
 
-done-testing;
+# vim: expandtab shiftwidth=4

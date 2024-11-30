@@ -1,4 +1,4 @@
-unit package Number::Denominate:ver<1.001001>;
+unit package Number::Denominate;
 use Lingua::Conjunction;
 
 my %Units =
@@ -159,3 +159,5 @@ sub denominate (
         $value.abs == 1 ?? "$value $_<singular>" !! "$value $_<plural>"
     });
 }
+
+# vim: expandtab shiftwidth=4

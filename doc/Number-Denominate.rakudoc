@@ -1,14 +1,13 @@
-[![Actions Status](https://github.com/raku-community-modules/Number-Denominate/actions/workflows/linux.yml/badge.svg)](https://github.com/raku-community-modules/Number-Denominate/actions) [![Actions Status](https://github.com/raku-community-modules/Number-Denominate/actions/workflows/macos.yml/badge.svg)](https://github.com/raku-community-modules/Number-Denominate/actions) [![Actions Status](https://github.com/raku-community-modules/Number-Denominate/actions/workflows/windows.yml/badge.svg)](https://github.com/raku-community-modules/Number-Denominate/actions)
+=begin pod
 
-NAME
-====
+=head1 NAME
 
 Number::Denominate - Break up numbers into preset or arbitrary denominations
 
-SYNOPSIS
-========
+=head1 SYNOPSIS
 
-```raku
+=begin code :lang<raku>
+
 use Number::Denominate;
 
 # 2 weeks, 6 hours, 56 minutes, and 7 seconds
@@ -37,22 +36,22 @@ say (denominate 1234567, :hash).perl;
 #   {:denomination(1),  :plural("seconds"), :singular("second"), :value(7) }
 #]
 say (denominate 1234567, :array).perl;
-```
 
-DESCRIPTION
-===========
+=end code
 
-Define arbitrary set of units and split up a number into those units. The module includes preset sets of units for some measures.
+=head1 DESCRIPTION
+
+Define arbitrary set of units and split up a number into those units. The
+module includes preset sets of units for some measures.
 
 Negative values will cause all units to obtain a negative sign.
 
-EXPORTED SUBROUTINES
-====================
+=head1 EXPORTED SUBROUTINES
 
-denominate
-----------
+=head2 denominate
 
-```raku
+=begin code :lang<raku>
+
     say denominate 1234567;
     say denominate 23*3600 + 54*60 + 50, :1precision;
     denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
@@ -62,13 +61,20 @@ denominate
     # Valid unit sets: info info-1024 length length-imperial length-mm time
     # volume volume-imperial weight weight-imperial
     denominate 21212121, :set<weight>;
-```
 
-**Takes** one mandatory positional argument—the number to denominate—and several optional named arguments that affect how the number is denominated and what format the denomination is returned in. See [`hash`](#hash) and [`array`](#array) arguments to modify the default [`string`](#string) return value. The named arguments are as follows:
+=end code
 
-### array
 
-```raku
+**Takes** one mandatory positional argument—the number to denominate—and
+several optional named arguments that affect how the number is denominated
+and what format the denomination is returned in. See [`hash`](#hash)
+and [`array`](#array) arguments to modify the default [`string`](#string)
+return value. The named arguments are as follows:
+
+=head3 array
+
+=begin code :lang<raku>
+
     # [
     #   {:denomination(7),  :plural("weeks"),   :singular("week"),   :value(2) },
     #   {:denomination(24), :plural("days"),    :singular("day"),    :value(0) },
@@ -77,38 +83,49 @@ denominate
     #   {:denomination(1),  :plural("seconds"), :singular("second"), :value(7) }
     #]
     say (denominate 1234567, :array).perl;
-```
 
-Boolean. **Defaults to** `False`. When `True`, [`denominate`](#denominate) will return denominations as an array of hashes. Each hash represents a single unit and has the following keys. The array will always contain each [`unit`](#units), ordered from largest to smallest.
+=end code
 
-#### denomination
+Boolean. **Defaults to** `False`. When `True`, [`denominate`](#denominate)
+will return denominations as an array of hashes. Each hash represents a single
+unit and has the following keys. The array will always contain each
+[`unit`](#units), ordered from largest to smallest.
 
-How many of the next smaller unit fits into this unit. This value is `1` for the smallest unit in the set.
+=head4 denomination
 
-#### plural
+How many of the next smaller unit fits into this unit. This value is `1` for
+the smallest unit in the set.
+
+=head4 plural
 
 The plural name of the unit.
 
-#### singular
+=head4 singular
 
 The singular name of the unit.
 
-#### value
+=head4 value
 
 The actual value of this unit.
 
-### hash
+=head3 hash
 
-```raku
+=begin code :lang<raku>
+
 # {:hours(6), :minutes(56), :seconds(7), :weeks(2)}
 say (denominate 1234567, :hash).perl;
-```
 
-Bool. Defaults to `False`. When `True`, `denominate` will return denominations as a hash. The keys will be the **singular** names of units and values will be the values of those units. **Note:** units whose values are zero will not be included.
+=end code
 
-### precision
+Bool. Defaults to C<False>. When C<True>, C<denominate> will return
+denominations as a hash. The keys will be the B<singular> names of
+units and values will be the values of those units. B<Note:> units
+whose values are zero will not be included.
 
-```raku
+=head3 precision
+
+=begin code :lang<raku>
+
 # 23 hours, 54 minutes, and 50 seconds
 say denominate 23*3600 + 54*60 + 50;
 
@@ -117,13 +134,20 @@ say denominate 23*3600 + 54*60 + 50, :1precision;
 
 # 23 hours and 55 minutes
 say denominate 23*3600 + 54*60 + 50, :2precision;
-```
 
-Takes positive integers as the value. Defaults to the number of `units` given (or the number of units in the `set`). Specifies how many, at most, units to include in the output. Rounding will be performed if needed. When output mode is set to `array`, all units will be present, but at most `precision` units will have non-zero values.
+=end code
 
-### set
+Takes positive integers as the value. Defaults to the number of
+C<units> given (or the number of units in the C<set>).  Specifies
+how many, at most, units to include in the output. Rounding will
+be performed if needed. When output mode is set to C<array>, all
+units will be present, but at most C<precision> units will have
+non-zero values.
 
-```raku
+=head3 set
+
+=begin code :lang<raku>
+
 # 2 weeks, 6 hours, 56 minutes, and 7 seconds
 say denominate 1234567;
 
@@ -132,128 +156,160 @@ say denominate 21212121, :set<weight>;
 
 # This script's size is 284 bytes
 say "This script's size is " ~ denominate $*PROGRAM-NAME.IO.s, :set<info>;
-```
 
-Loads a pre-defined set of `units` to use for denominations. Has effect only when `units` argument is not specified. Defaults to `time`. Takes the name of one of the predefined unit sets, which are as follows (see description of `units` argument, if the meaning of values is not clear):
+=end code
 
-#### info
+Loads a pre-defined set of C<units> to use for denominations.  Has
+effect only when C<units> argument is not specified.  Defaults to
+C<time>. Takes the name of one of the predefined unit sets, which
+are as follows (see description of C<units> argument, if the meaning
+of values is not clear):
 
-```raku
+=head4 info
+
+=begin code :lang<raku>
+
 yottabyte => 1000, zettabyte => 1000, exabyte => 1000, petabyte => 1000,
 terabyte  => 1000, gigabyte => 1000, megabyte => 1000, kilobyte => 1000,
 'byte'
-```
+
+=end code
 
 Units of information.
 
-#### info-1024
+=head4 info-1024
 
-```raku
+=begin code :lang<raku>
+
 yobibyte => 1024, zebibyte => 1024, exbibyte => 1024, pebibyte => 1024,
 tebibyte => 1024, gibibyte => 1024, mebibyte => 1024, kibibyte => 1024,
 'byte'
-```
+
+=end code
 
 Units of information (multiples of 1024).
 
-#### length
+=head4 length
 
-```raku
+=begin code :lang<raku>
+
 'light year' => 9_460_730_472.5808,
   kilometer => 1000,
     'meter'
-```
+
+=end code
 
 Units of length (large only).
 
-#### length-imperial
+=head4 length-imperial
 
-```raku
+=begin code :lang<raku>
+
 mile => 1760,
   yard => 3,
     <foot feet> => 12,
       <inch inches>
-```
+
+=end code
 
 Units of length (Imperial).
 
-#### length-mm
+=head4 length-mm
 
-```raku
+=begin code :lang<raku>
+
 'light year' => 9_460_730_472.5808,
   kilometer => 1000,
     meter => 100,
       centimeter => 10,
         'millimeter'
-```
+
+=end code
 
 Units of length (includes smaller units).
 
-#### time
+=head4 time
 
-```raku
+=begin code :lang<raku>
+
 week => 7,
   day => 24,
     hour => 60,
       minute => 60,
         'second'
-```
+
+=end code
 
 Units of time.
 
-#### volume
+=head4 volume
 
-```raku
+=begin code :lang<raku>
+
 Liter => 1000,
   'milliliter'
-```
+
+=end code
 
 Units of volume.
 
-#### volume-imperial
+=head4 volume-imperial
 
-```raku
+=begin code :lang<raku>
+
 gallon => 4,
   quart => 2,
     pint => 2,
       cup => 8,
         'fluid ounce'
-```
+
+=end code
 
 Units of volume (Imperial).
 
-#### weight
+=head4 weight
 
-```raku
+=begin code :lang<raku>
+
 tonne => 1000,
   kilogram => 1000,
     'gram'
-```
+
+=end code
 
 Units of weight.
 
-#### weight-imperial
+=head4 weight-imperial
 
-```raku
+=begin code :lang<raku>
+
 ton => 2_000,
   pound => 16,
     'ounce'
-```
+
+=end code
 
 Units of weight (Imperial).
 
-### string
+=head3 string
 
-```raku
+=begin code :lang<raku>
+
 # 2 weeks, 6 hours, 56 minutes, and 7 seconds
 say denominate 1234567;
-```
 
-Bool. Has effect only when `hash` and `array` arguments are `False`. (which is the default). Defaults to `True`. When `True`, `denominate` will return its output as a string. Units whose values are zero won't be included, unless the number to denominate is `0`, in which case the smallest available unit will be present in the string (set to `0`).
+=end code
 
-### units
+Bool. Has effect only when C<hash> and C<array> arguments are C<False>.
+(which is the default). Defaults to C<True>. When C<True>, C<denominate>
+will return its output as a string. Units whose values are zero won't
+be included, unless the number to denominate is C<0>, in which case
+the smallest available unit will be present in the string (set to C<0>).
 
-```raku
+=head3 units
+
+=begin code :lang<raku>
+
 # 4 foos, 2 boors, and 1 ber
 say denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
 
@@ -265,19 +321,25 @@ denominate 42, :units(
     <minute minutes> => 60,
     <second seconds>
 );
-```
 
-Specifies units to use for denominations. These can be set to one of the presets using the `set` argument. Takes a list of pairs where the key is the name of the unit and the value is the number of the next smaller unit that fits into this unit. The name is a list of singular and plural name of the unit. If the name is set to a string, the plural name will be derived by appending `s` to the singular unit name. The smallest unit is specified simply as a string indicating its name (or as a list of singular/plural strings).
+=end code
 
-AUTHOR
-======
+Specifies units to use for denominations. These can be set to one of the
+presets using the C<set> argument. Takes a list of pairs where the key
+is the name of the unit and the value is the number of the next smaller
+unit that fits into this unit. The name is a list of singular and plural name
+of the unit. If the name is set to a string, the plural name will be derived
+by appending `s` to the singular unit name. The smallest unit is specified
+simply as a string indicating its name (or as a list of singular/plural
+strings).
+
+=head1 AUTHOR
 
 Zoffix Znet
 
 Currently maintained by the Raku Community
 
-COPYRIGHT AND LICENSE
-=====================
+=head1 COPYRIGHT AND LICENSE
 
 Copyright 2015 - 2018 Zoffix Znet
 
@@ -285,3 +347,6 @@ Copyright 2019 - 2024 Raku Community
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
+=end pod
+
+# vim: expandtab shiftwidth=4

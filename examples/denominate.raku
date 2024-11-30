@@ -1,7 +1,3 @@
-#!perl6
-
-use v6;
-use lib 'lib';
 use Number::Denominate;
 
 # 2 weeks, 6 hours, 56 minutes, and 7 seconds
@@ -20,7 +16,7 @@ say "This script's size is " ~ denominate $*PROGRAM-NAME.IO.s, :set<info>;
 say denominate 449, :units( foo => 3, <bar boors> => 32, 'ber' );
 
 # {:hours(6), :minutes(56), :seconds(7), :weeks(2)}
-say (denominate 1234567, :hash).perl;
+say (denominate 1234567, :hash).raku;
 
 # [
 #   {:denomination(7),  :plural("weeks"),   :singular("week"),   :value(2) },
@@ -29,4 +25,6 @@ say (denominate 1234567, :hash).perl;
 #   {:denomination(60), :plural("minutes"), :singular("minute"), :value(56)},
 #   {:denomination(1),  :plural("seconds"), :singular("second"), :value(7) }
 #]
-say (denominate 1234567, :array).perl;
+say (denominate 1234567, :array).raku;
+
+# vim: expandtab shiftwidth=4

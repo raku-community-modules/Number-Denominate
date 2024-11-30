@@ -1,9 +1,7 @@
-#!perl6
-
-use v6;
 use Test;
-use lib 'lib';
 use Number::Denominate;
+
+plan 9;
 
 is denominate(58*60 + 42, :1precision), '59 minutes', 'round up';
 is denominate(59*60 + 29, :1precision), '59 minutes', 'round down';
@@ -23,4 +21,4 @@ is denominate(60*60*24*7 + 60*60*24*3, :1precision), '1 week',
 is denominate(-(60*60*24*7 + 60*60*24*3), :1precision), '-1 week',
         'round down [highest unit (negative)]';
 
-done-testing;
+# vim: expandtab shiftwidth=4
