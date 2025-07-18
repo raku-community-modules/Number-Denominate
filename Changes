@@ -2,6 +2,9 @@ Revision History for Number-Denominate
 
 {{$NEXT}}
 
+2.3  2025-07-18T13:28:15+02:00
+    - Up version to make sure this is the most recent one
+
 2.2  2025-07-18T13:23:02+02:00
     - Allow any numeric value to be specified to "denominate",
       such as a Duration
