@@ -1,7 +1,7 @@
 unit package Number::Denominate;
 use Lingua::Conjunction;
 
-my %Units =
+my constant %Units =
     time => (
         week => 7,
             day => 24,
@@ -63,12 +63,12 @@ my %Units =
 subset ValidUnitSet of Str where any <time weight weight-imperial length
     length-mm length-imperial volume volume-imperial info info-1024>;
 
-sub denominate (
-    $num is copy where Int|Num,
+sub denominate(
+    Num() $num is copy,
     ValidUnitSet :$set = 'time',
     Bool :$array       = False,
     Bool :$hash        = False,
-    Bool :$string      = ($array or $hash) ?? False !! True,
+    Bool :$string      = !($array or $hash),
     :@units is copy    = %Units{ $set },
     Int  :$precision where $_ >= 1 = @units.elems,
 ) is export {

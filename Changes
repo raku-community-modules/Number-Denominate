@@ -2,6 +2,12 @@ Revision History for Number-Denominate
 
 {{$NEXT}}
 
+2.2  2025-07-18T13:23:02+02:00
+    - Allow any numeric value to be specified to "denominate",
+      such as a Duration
+    - Some minor performance tweaks
+    - Updated copyright year
+
 2.1  2024-11-30T19:47:16+01:00
     - Added CI badge for each OS
     - Use modern filename extensions
